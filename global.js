@@ -15,6 +15,17 @@ function sameArray(ar1, ar2){
         if(ar1[i].city!=ar2[i].city){
             return false;
         }
-    }    
+    }
     return true;
+}
+function issetInArray(ar,population){
+    //return true if in array
+    let check=false;
+    for(let j=0;j<population.length;j++){
+        if(sameArray(population[j], ar)){
+            check=true;
+            break;
+        }
+    }
+    return check;
 }

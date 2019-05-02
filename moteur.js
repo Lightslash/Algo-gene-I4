@@ -1,16 +1,21 @@
 //créer la population : 
-var population = createPopulation(cities, 100);
-//console.log(population);
+var population = createPopulation(cities, 1000);
+var index = 0;
+while(population.length>1){
+console.log(index);
 
-//Evalution : 
+console.log("Evalution :");
 population = evaluation(population);
 
-//Sélection (rang, tournoi, proportionnelle, uniforme) :
+console.log("Sélection (rang, tournoi, proportionnelle, uniforme) :");
 population = selection_tournoi(population);
 
-//Evolution (croisement, mutation)
-//population = croisement(population);
+console.log("Evolution (croisement, mutation)");
+population = croisement(population);
 
+index++;
+}
+console.log(population);
 //Afficher la réponse
 let toRet = "En chantier";
 display_answer(toRet);

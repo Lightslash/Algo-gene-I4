@@ -6,14 +6,7 @@ function createPopulation(cities,branches){
             population.push(ar);
         }else{
             while(population.length==i){
-                let check = true;
-                for(let j=0;j<population.length;j++){
-                    if(sameArray(population[j], ar)){
-                        check =false;
-                        break;
-                    }
-                }
-                if(check==true){
+                if(!issetInArray(ar, population)){
                     population.push(ar);
                 }
             }

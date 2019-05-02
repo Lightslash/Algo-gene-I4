@@ -16,6 +16,10 @@ function selection_tournoi(population){
     while(pop.length<population.length/2){
         let individu_1 = population[i];
         let individu_2 = population[i+1];
+        if(individu_2 == undefined){
+            pop.push(individu_1);
+            return pop;
+        }
         if(individu_1.note <= individu_2.note){
             pop.push(individu_1);
         }else{
