@@ -2,18 +2,37 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<style>
+		/* Set the size of the div element that contains the map */
+		#map {
+			height: 400px;  /* The height is 400 pixels */
+			width: 100%;  /* The width is the width of the web page */
+		 }
+	</style>
+
+
 	<title>Carte de france</title>
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
+
+
+
+
 <body>
     <div class="content-container" id="answer-container">
-            
+            <!--Afficher l'itinairaire-->
     </div>
 </body>
 
     <script type="text/javascript" src="cities.json"></script>
     <script src="jquery.min.js"></script>
     <script src="croisement.js"></script>
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuLo4Oi3DZHr9L6yQ4BubGxSnCStod-bo&callback=initMap"> </script>
+
     <script src="mutation.js"></script>
     <script src="selection.js"></script>
     <script src="evaluation.js"></script>
@@ -22,5 +41,45 @@
     <script src="global.js"></script>
     <script src="interface.js"></script>
     <script src="moteur.js"></script>
-    
+
+		<h2> On Google Maps </h2>
+		<div id="map"></div>
+	<script>
+// Initialize and add the map
+function initMap() {
+// The location of Uluru
+var uluru = {lat: -25.344, lng: 131.036};
+// The map, centered at Uluru
+var map = new google.maps.Map(
+		document.getElementById('map'), {zoom: 4, center: uluru});
+// The marker, positioned at Uluru
+var marker = new google.maps.Marker({position: uluru, map: map});
+}
+	</script>
+
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuLo4Oi3DZHr9L6yQ4BubGxSnCStod-bo&callback=initMap"> </script>
+
+
+
+		<!--
+
+		<div id="map">
+
+
+		</div>
+		<script>
+		 function initMap(){
+			 var options = {
+				 zoom:8,
+				 center:{lat:44.8478,lng:-0.5794}
+			 }
+			 var map = new google.maps.Map(document.getElementById("map"),options);
+
+		 }
+		</script>
+
+-->
+
+
 </html>
