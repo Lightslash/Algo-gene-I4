@@ -4,20 +4,18 @@ function display_answer(answer){
 
 function calculate_answer(population){
   //ON a le tableau des 15 villes mélangées avec leurs coordonnées au départ
-  console.log("ville");
+  console.log("Calcul d'un résultat");
   var i = 0;
   var calcd;
   var somme = 0;
   while(i<population.length-1){
     calcd = calculDistance(population[i]["lan"],population[i]["lng"],population[i+1]["lan"],population[i+1]["lng"]);
-    console.log("distance "+population[i]["city"]+"-"+population[i+1]["city"]);
-    console.log(calcd);
-    somme +=  parseFloat(calcd);
+    //console.log("distance "+population[i]["city"]+"-"+population[i+1]["city"]);
+    //console.log(calcd);
+    somme += parseFloat(calcd);
     i++
   }
-  console.log(somme);
-
-
+  return somme;
 }
 
 /*
@@ -38,10 +36,9 @@ function calculate_answer(population){
 
 */
 function placePoints(population,macarte) {
-      var i = 0;
-      while (i<population.length-1) {
-        var marker = L.marker([population[i]["lan"],population[i]["lng"]]).addTo(macarte);
-        i++;
-      }
-
+  var i = 0;
+  while (i<population.length-1) {
+    var marker = L.marker([population[i]["lan"],population[i]["lng"]]).addTo(macarte);
+    i++;
   }
+}

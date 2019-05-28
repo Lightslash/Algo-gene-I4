@@ -1,4 +1,5 @@
 function evaluation(population){
+    console.log("Evaluation");
     let pop = [];
     for(let i=0;i<population.length;i++){
         let individu = population[i];

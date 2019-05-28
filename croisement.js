@@ -1,4 +1,5 @@
 function croisement(population){
+    console.log("Evolution (croisement)");
     let pop = [];
     let i=0;
     while(pop.length<population.length){

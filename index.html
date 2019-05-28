@@ -4,123 +4,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<style>
-		/* Set the size of the div element that contains the map */
-
-	</style>
-
-
 	<title>Carte de france</title>
-    <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/index.css">
 </head>
-
-
-
-
 <body>
-    <div class="content-container" id="answer-container">
-            <!--Afficher l'itinairaire-->
-    </div>
+	<div class="content-container" id="answer-container">
+					<!--Afficher l'itinairaire-->
+	</div>
 </body>
+	<script src="cities.json"></script>
+	<script src="jquery.min.js"></script>
+	<script src="croisement.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
-    <script src="cities.json"></script>
-    <script src="jquery.min.js"></script>
-    <script src="croisement.js"></script>
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-				crossorigin="" />
-		<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-		<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-		crossorigin=""/>
-		</script>
-		<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"/> </script>
+	<script src="mutation.js"></script>
+	<script src="selection.js"></script>
+	<script src="evaluation.js"></script>
+	<script src="calculdistance.js"></script>
+	<script src="population.js"></script>
+	<script src="global.js"></script>
+	<script src="interface.js"></script>
 
-    <script src="mutation.js"></script>
-    <script src="selection.js"></script>
-    <script src="evaluation.js"></script>
-    <script src="calculdistance.js"></script>
-    <script src="population.js"></script>
-    <script src="global.js"></script>
-    <script src="interface.js"></script>
-    <script src="moteur.js"></script>
+	<h2> On Open Street Map </h2>
+	<div id="map"></div>
 
-
-
-
-
-		<h2> On Open Street Map </h2>
-		<div id="map">
-
-
-		</div>
-
-		<script type="text/javascript">
-
-		//créer la population :
-		var population = createPopulation(cities, 1000);
-		var index = 0;
-		while(population.length>1){
-		console.log(index);
-
-		console.log("Evaluation :");
-		population = evaluation(population);
-
-		console.log("Sélection (rang, tournoi, proportionnelle, uniforme) :");
-		population = selection_tournoi(population);
-
-		console.log("Evolution (croisement, mutation)");
-		population = croisement(population);
-
-		index++;
-		}
-		console.log("pop")
-		console.log(population);
-
-		//Afficher la réponse
-		let toRet = calculate_answer(population[0]);
-		var i = 0;
-
-		// On initialise la latitude et la longitude de Paris (centre de la carte)
-		var lat = 46.8478;
-		var lon = 1.9794;
-		var macarte = null;
-		// Fonction d'initialisation de la carte
-		function initMap() {
-			// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-					macarte = L.map('map').setView([lat, lon], 6);
-					// Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
-					L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-							// Il est toujours bien de laisser le lien vers la source des données
-							minZoom: 1,
-							maxZoom: 20
-					}).addTo(macarte);
-
-			while (i<population[0].length) {
-				console.log(i);
-				L.marker([population[0][i]["lan"],population[0][i]["lng"]]).addTo(macarte);
-				i++;
-				if(i<population[0].length){
-					var pointA = new L.LatLng(population[0][i-1]["lan"], population[0][i-1]["lng"]);
-					var pointB = new L.LatLng(population[0][i]["lan"], population[0][i]["lng"]);
-
-					var pointList = [pointA, pointB];
-					var firstpolyline = new L.Polyline(pointList,{
-						color: 'red',
-						weight: 3,
-						opacity: 0.5,
-						smoothFactor: 1
-					});
-					firstpolyline.addTo(macarte);
-			}
-		}
-
-	}
-		window.onload = function(){
-			initMap();
-		};
-
-
-			//récupérer la lsite des villes et afficher les pointeurs en la parcourant
-		</script>
-
+	<script src="moteur.js"></script>
 </html>

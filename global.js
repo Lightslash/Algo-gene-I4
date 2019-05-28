@@ -18,11 +18,11 @@ function sameArray(ar1, ar2){
     }
     return true;
 }
-function issetInArray(ar,population){
+function issetInArray(ar,pop){
     //return true if in array
     let check=false;
-    for(let j=0;j<population.length;j++){
-        if(sameArray(population[j], ar)){
+    for(let j=0;j<pop.length;j++){
+        if(sameArray(pop[j], ar)){
             check=true;
             break;
         }
