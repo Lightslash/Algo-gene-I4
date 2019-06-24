@@ -1,23 +1,25 @@
 //créer la population :
-var population = createPopulation(cities, 10000);
 var memory = [];
 var generation = 1;
-while(population.length>1){
-    console.log("Génération ",generation);
-
-    population = evaluation(population);
-
-    population = selection_tournoi(population);
-
-    population = croisement(population);
-    
-    if(Math.floor(Math.random()*5)==1){
-        population = mutation(population);
+var population = [];
+while(generation<1000){
+    population = createPopulation(cities, 100, population);
+    while(population.length>10){
+        console.log("Génération ",generation);
+        console.log("Population : ", population.length);
+        population = evaluation(population);
+        population = selection_tournoi(population);
+        population = croisement(population);
+        if(Math.floor(Math.random()*5)==1){
+            population = mutation(population);
+        }
+        generation++;
     }
-    generation++;
 }
 //Afficher la réponse
-let toRet = calculate_answer(population[0]);
+let _best = best(evaluation(population));
+console.log(_best);
+let toRet = calculate_answer(_best);
 answer = toRet;
 console.log(answer);
 var i = 0;

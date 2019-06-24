@@ -13,13 +13,14 @@ function croisement(population){
         let cross = one_point_crossover(parent_1, parent_2);
         var enfant_1 = cross[0];
         var enfant_2 = cross[1];
-        if(!issetInArray(enfant_1, population) && !issetInArray(enfant_2, population)){
+        if(!issetInArray(enfant_1, memory) && !issetInArray(enfant_2, memory)){
             pop.push(enfant_1);
             pop.push(enfant_2);
-        }else{
-            pop.push(parent_1);
-            pop.push(parent_2);
+            memory.push(enfant_1);
+            memory.push(enfant_2);
         }
+        pop.push(parent_1);
+        pop.push(parent_2);
         i+=2;
     }
     return pop;

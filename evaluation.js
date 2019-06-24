@@ -12,7 +12,8 @@ function eval(individu){
     let note = 0;
     for(let i=0;i<individu.length-1;i++){
         let dis = calculDistance(individu[i].lan,individu[i].lng,individu[i+1].lan,individu[i+1].lng);
+        dis = parseInt(dis);
         note+=dis;
     }
-    return note/individu.length;
+    return note;
 }
