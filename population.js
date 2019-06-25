@@ -1,4 +1,4 @@
-function createPopulation(cities,branches, population){
+function createPopulation(cities,branches){
     //let population = [];
     for(let i=0;i<branches;i++){
         let ar = shuffle(cities);

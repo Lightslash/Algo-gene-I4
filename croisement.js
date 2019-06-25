@@ -1,5 +1,6 @@
 function croisement(population){
     console.log("Evolution (croisement)");
+    console.log("population avant croisement : ", population.length);
     let pop = [];
     let i=0;
     while(pop.length<population.length){
@@ -14,6 +15,7 @@ function croisement(population){
         var enfant_1 = cross[0];
         var enfant_2 = cross[1];
         if(!issetInArray(enfant_1, memory) && !issetInArray(enfant_2, memory)){
+            console.log("x 2 enfants");
             pop.push(enfant_1);
             pop.push(enfant_2);
             memory.push(enfant_1);
@@ -23,6 +25,7 @@ function croisement(population){
         pop.push(parent_2);
         i+=2;
     }
+    console.log("population après croisement : ", pop.length);
     return pop;
 }
 function one_point_crossover(parent1, parent2){

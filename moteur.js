@@ -2,19 +2,17 @@
 var memory = [];
 var generation = 1;
 var population = [];
-while(generation<1000){
-    population = createPopulation(cities, 100, population);
-    while(population.length>10){
-        console.log("Génération ",generation);
-        console.log("Population : ", population.length);
-        population = evaluation(population);
-        population = selection_tournoi(population);
-        population = croisement(population);
-        if(Math.floor(Math.random()*5)==1){
-            population = mutation(population);
-        }
-        generation++;
+population = createPopulation(cities, 1000);
+while(population.length>1){
+    console.log("Génération ",generation);
+    console.log("Population : ", population.length);
+    population = evaluation(population);
+    population = selection_tournoi(population);
+    population = croisement(population);
+    if(Math.floor(Math.random()*5)==1){
+        population = mutation(population);
     }
+    generation++;
 }
 //Afficher la réponse
 let _best = best(evaluation(population));
